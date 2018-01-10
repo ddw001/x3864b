@@ -1,0 +1,2001 @@
+<html><head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="utf-8" http-equiv="encoding">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon-precomposed" href="img/app_icon.jpg">
+<link rel="apple-touch-icon" href="img/app_icon.jpg"/>
+<link rel="apple-touch-startup-image" href="images/splash.png">
+<script src="js/bower_components/jquery/dist/jquery.js"></script>
+<script src="js/bower_components/pickadate/lib/legacy.js"></script>
+<script src="js/bower_components/pickadate/lib/picker.js"></script>
+<script src="js/bower_components/pickadate/lib/picker.date.js"></script>
+<script src="js/bower_components/pickadate/lib/picker.time.js"></script>
+<script src="js/bower_components/intl-tel-input/build/js/intlTelInput.min.js"></script>
+<script src="js/bower_components/intl-tel-input/build/js/utils.js"></script>
+<script src="js/bower_components/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
+<script src="js/lib.js"></script>
+<script src="js/amplify.js"></script>
+<script src="js/tea-block.js"></script>
+<script src="js/jquery.noclickdelay.js"></script>
+<script src="js/jquery-datepicker.js"></script>
+
+<script src="js/jquery.transit.min.js"></script>
+<script src="js/jquery.touchwipe.min.js"></script>
+<script src="js/velocity.min.js"></script>
+<script src="js/velocity.ui.js"></script>
+<script src="js/overthrow-detect.js"></script>
+<script src="js/overthrow-polyfill.js"></script>
+<script src="js/overthrow-toss.js"></script>
+<script src="js/overthrow-init.js"></script>
+<script src="cordova.js"></script>
+<script src="js/index.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/bootstrap.js"></script>
+<!--
+<script src="js/summernote.min.js"></script>
+-->
+<script src="js/pikaday.js" type="text/javascript"></script>
+<script src="js/ZeroClipboard.min.js" type="text/javascript"></script>
+<script src="js/numbro.js" type="text/javascript"></script>
+<script src="js/handsontable.js" type="text/javascript"></script>
+<link href="css/handsontable.css" rel="stylesheet" />
+<link href="css/pikaday.css" rel="stylesheet" />
+<script src="js/jsplumb.min.js"></script>
+<script src="js/jquery.connections.js"></script>
+
+<link href="css/polaris/polaris.css?t=2" rel="stylesheet">
+<script src="js/icheck.min.js"></script>
+<script src="js/interact.min.js"></script>
+<script src="ckeditor/ckeditor.js"></script>
+<script src="ckeditor/adapters/jquery.js"></script>
+<!--
+<script src="js/fastclick.js"></script>
+-->
+
+<script src="js/switchery.js"></script>
+<script src="bwip.js"></script>
+<script src="lib/symdesc.js"></script>
+<script src="lib/needyoffset.js"></script>
+<script src="lib/canvas.js"></script>
+<!--
+<link rel="stylesheet" href="css/bootstrap.css" />
+-->
+<link rel="stylesheet" href="css/axsure.css" />
+<!--
+<link rel="stylesheet" href="css/summernote.css" />
+-->
+<link rel="stylesheet" href="css/jquery-ui.css" />
+<link rel="stylesheet" href="css/switchery.css" />
+<link rel="stylesheet" href="js/bower_components/pickadate/lib/themes/default.css" />
+<link rel="stylesheet" href="js/bower_components/pickadate/lib/themes/default.date.css" />
+<link rel="stylesheet" href="js/bower_components/pickadate/lib/themes/default.time.css" />
+<link rel="stylesheet" href="js/bower_components/intl-tel-input/build/css/intlTelInput.css" />
+
+<style>
+.iti-flag {background-image: url("js/bower_components/intl-tel-input/build/img/flags.png");}
+.intl-tel-input * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    color: black;
+}
+.error-msg {
+  color: red;
+}
+.valid-msg {
+    color: #00C900;
+}
+input.error {
+    border: 1px solid #FF7C7C;
+}
+</style>
+
+<title>ProcessPal</title>
+<script>
+
+$(function() {
+    try {
+        cordova; // if we are running cordova let index.js run init after the device is ready.
+        Keyboard.shrinkView(false);
+    } catch (e) {
+        init(); // we are testing in the browser
+    }
+    $("body").css("display", "block");
+});
+
+// Handle Device Version.
+document.addEventListener("deviceready", onDeviceReady, false);
+
+function onDeviceReady() {
+    if (
+        typeof device !== 'undefined'
+        && device.platform == "Android"
+        && device.version.split('.')[0] == 4
+    ) {
+        document.is_android4 = true;
+    } else {
+        document.is_android4 = false;
+    }
+}
+
+</script>
+</head>
+<body style="display:none">
+<div id="body_div">
+    <div id="navbar_div">
+        <table width="100%" height="60">
+            <tr>
+                <td width="25%" align="left">
+                    <div id="navbar_left">
+                    </div>
+                </td>
+                <td width="50%" height="60" align="center" valign="center" class="navbar_center">
+                    <table width="100%" height="100%">
+                        <tr>
+                            <td align="center">
+                                <img onclick="ui.showHome(true)" src="images/PP-Registered-Logo-only.png" style="max-height:60px;display:inline;">
+                            </td>
+                            <td align="left">
+                                <div style="display:inline;height:60px;line-height:60px;"></div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </td>
+                <td width="25%" align="right">
+                    <div id="navbar_right">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="window_main">
+    </div>
+    <div id="toolbar_div">
+    </div>
+</div>
+
+<div id="edit_activity_toolbar_tpl" class="tpl">
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center">
+                <div class="toolbar_item button" onclick="ui.showDeleteActivity('{activity_id}')">Delete</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="personal_toolbar" class="tpl">
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center" width="33%">
+                <div class="toolbar_item button" onclick="ui.show1()">example 1</div>
+            </td>
+            <td align="center" width="33%">
+                <div class="toolbar_item button" onclick="ui.show2()">example 2</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="designer_toolbar_tpl" class="tpl">
+    <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+            <td align="center" width="33%">
+                <div class="toolbar_item button" onclick="ui.saveWorkflow('{workflow_id}')">
+                    <table style="height:100%">
+                        <tr>
+                            <td>
+                                <img src="images/save.png" style="max-height:24px;">
+                            </td>
+                            <td style="color:black">
+                                Save
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td align="center" width="33%">
+                <div class="toolbar_item button" onclick="ui.showPublishWorkflow('{workflow_id}')">
+                    <table style="height:100%">
+                        <tr>
+                            <td>
+                                <img src="images/publish.png" style="max-height:24px;">
+                            </td>
+                            <td style="color:black">
+                                Publish
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<div id="main_tpl" class="tpl">
+    <div class="btn" onclick="ui.showNewWorkspace()">
+        Create a workspace
+    </div>
+
+    <div id="workspace_list"></div>
+</div>
+
+<div id="new_workspace_tpl" class="tpl">
+    <div class="generic_head">New Workspace</div>
+    <br>
+    <input type="text" placeholder="Workspace Name" id="new_workspace_name">
+    <div class="btn" onclick="ui.createWorkspace()">Create</div>
+
+</div>
+
+
+<div id="new_workflow_tpl" class="tpl">
+    <div class="generic_head">New Workflow</div>
+    <br>
+    <input type="text" placeholder="Workflow Name" id="new_workflow_name">
+    <div class="btn" onclick="ui.createWorkflow()">Create</div>
+
+</div>
+
+
+
+<div id="new_workflow_tpl" class="tpl">
+    <div class="generic_head">New Workflow</div>
+    <br>
+    <input type="text" placeholder="Workflow Name" id="new_workflow_name">
+    <div class="btn" onclick="ui.createWorkflow()">Create</div>
+
+</div>
+
+<div id="workspace_cell_tpl" class="tpl">
+    <table class="generic_cell" onclick="ui.showWorkspace('{id}')">
+        <tr>
+            <td>{name}</td>
+        </tr>
+    </table>
+</div>
+
+<div id="workspace_tpl" class="tpl">
+    <div class="btn" onclick="ui.showNewWorkflow()">
+        Create a workflow
+    </div>
+    <div id="workflow_list"></div>
+</div>
+
+
+<div id="workflow_init_tpl" class="tpl">
+    <div class="btn" onclick="ui.showWorkflowEditor('{id}')">
+        Design Workflow
+    </div>
+    <div class="btn" onclick="ui.loadAndDisplayWorkflow('{id}')">
+        Execute Workflow
+    </div>
+</div>
+
+
+
+
+<div id="workflow_cell_tpl" class="tpl">
+    <table class="generic_cell" onclick="ui.loadWorkflowInit('{id}')">
+        <tr>
+            <td>{name}</td>
+        </tr>
+    </table>
+</div>
+
+<div id="blank_activity_tpl" class="tpl">
+    <p class="padded_text">This workflow has not been set up yet</p>
+</div>
+
+<div id="blank_activity_owner_tpl" class="tpl">
+    <p class="padded_text">This workflow has not been set up yet</p>
+    <br>
+    <div class="btn" onclick="ui.showWorkflowEditor('{workflow_id}')">Edit Workflow</div>
+</div>
+
+
+<div id="workflow_editor_tpl" class="tpl">
+    <div class="activity_type_selector">
+        <table style="height:100%;width:100%;border:1px solid black;background-color:#222222">
+            <tr>
+                <td class="activity_type_icon"><img src="images/menu.png" style="max-width:30px"></td>
+            </tr>
+            <tr>
+                <td class="activity_type_icon form_icon_container"><div class="activity_drop draggable drag-drop icon_circle blue_background" data-type="form_icon">F</div></td>
+            </tr>
+            <tr>
+                <td class="activity_type_icon notify_icon_container"><div class="activity_drop draggable drag-drop icon_circle green_background" data-type="notify_icon">N</div></td>
+            </tr>
+            <tr>
+                <td class="activity_type_icon timer_icon_container"><div class="activity_drop draggable drag-drop icon_circle pink_background" data-type="timer_icon">T</div></td>
+            </tr>
+            <tr>
+                <td class="activity_type_icon role_icon_container"><div class="activity_drop draggable drag-drop icon_circle orange_background" data-type="role_icon">R</div></td>
+            </tr>
+            <tr>
+                <td class="activity_type_icon api_icon_container"><div class="activity_drop draggable drag-drop icon_circle purple_background" data-type="api_icon">API</div></td>
+            </tr>
+            <tr>
+                <td class="activity_type_icon payment_icon_container"><div class="activity_drop draggable drag-drop icon_circle red_background" data-type="payment_icon">$</div></td>
+            </tr>
+
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div class="activity_drop_zone">
+        <div class="activity_object blue_background" data-id="1" style="top:{top}px; left:{left}px;position:absolute" id="connector_1">
+            <table width="100%">
+                <tr>
+                    <td>Start</td>
+                </tr>
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div id="publish_workflow_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px">Publish Your Workflow</div></td>
+        </tr>
+    </table>
+    <p>Publish to:</p>
+    <select id="publish_to" onchange="ui.changePublishTo()">
+        <option value="">Select an Option</option>
+        <option value="roles">Roles</option>
+        <option value="free">Marketplace - Free</option>
+        <option value="paid">Marketplace - Paid</option>
+    </select>
+    <div id="publish_to_roles" style="display:none" class="publish_options">
+        <p>Select roles:</p>
+        <select multiple id="publish_role_select" style="width:200px;height:200px">
+        </select>
+        <br>
+    </div>
+    <div id="publish_to_paid" style="display:none" class="publish_options">
+        <p>Per usage price:</p>
+        R&nbsp;<input type="text" placeholder="e.g. 20">
+    </div>
+    <div class="btn" onclick="ui.deployWorkflow()" id="deploy_button" style="display:none">Deploy</div>
+</div>
+
+<div id="maintain_data_tpl" class="tpl">
+    <div class="generic_head">My Data</div>
+    <table style="padding:20px">
+        <tr>
+            <td>
+                <p>Custom data sets:</p>
+                <select id="current_data_sets" onchange="ui.showDataSet(this.value)">
+                    <option value=""></option>
+                    <option value="_new">Create a new data set</option>
+                </select>
+            </td>
+            <td style="display:none">
+                <p>Workflow data:</p>
+                <select id="current_data_sets" onchange="ui.showWorkflowData(this.value)">
+                    <option value=""></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <div style="padding:20px" id="data_viewer"></div>
+</div>
+
+
+<div id="data_viewer_tpl" class="tpl">
+    <form enctype="multipart/form-data" method="post" name="data_form">
+        <input type="file" name="data_file" id="data_file" required />
+        <input type="hidden" id="set_id" value="{set_id}">
+    </form>
+    <div id="data_viewer_table" style="color:black!important;margin-left:auto;margin-right:auto">
+    </div>
+</div>
+
+<!--
+    <div id="progress-wrp">
+        <div class="progress-bar"></div>
+        <div class="status">0%</div>
+    </div>
+-->
+
+
+<div id="new_data_set_tpl" class="tpl">
+    <div class="generic_head">New Data Set</div>
+    <p>Data Set Name:</p>
+    <input type="text" id="new_data_set_name">
+    <div class="btn" onclick="ui.createDataSet()">Create</div>
+</div>
+
+<div id="maintain_roles_tpl" class="tpl">
+    <div class="generic_head">Roles</div>
+    <table>
+        <tr>
+            <td>New Role:</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="new_role_name">
+            </td>
+            <td>
+                <div class="btn" onclick="ui.addNewRole()">Add</div>
+        </tr>
+    </table>
+    <div id="edit_role_list"></div>
+
+</div>
+
+<div id="maintain_role_cell_tpl" class="tpl">
+    <table class="generic_cell" onclick="ui.showMaintainRole('{role_id}')">
+        <tr>
+            <td>{role_name}</td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="role_member_cell_tpl" class="tpl">
+    <table class="generic_cell">
+        <tr>
+            <td>{cellnum}{email}</td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="maintain_role_tpl" class="tpl">
+    <table class="generic_head" style="width:100%;padding:10px">
+        <tr>
+            <td align="left"><div style="font-size:22px">{role_name}</div></td>
+            <td align="right" onclick="ui.showDeleteRole('{role_id}')">
+                <u>Delete</u>
+            </td>
+        </tr>
+    </table>
+    <p>Invite member:</p>
+    <input type="text" placeholder="Email or Cell number" id="invite_role_member">
+    <div class="btn" onclick="ui.sendRoleInvite('{role_id}')">Send Invite</div>
+    <div id="role_member_list"></div>
+</div>
+
+<div id="main_settings_tpl" class="tpl">
+    <div class="generic_head">Settings</div>
+    <table class="generic_cell" onclick="ui.showMaintainRoles()">
+        <tr>
+            <td style="font-size:18px">Roles</td>
+        </tr>
+        <tr>
+            <td>
+                <div style="font-size:12px;padding-right:20px">Create and assign roles</div>
+            </td>
+        </tr>
+    </table>
+    <table class="generic_cell" onclick="ui.showMaintainData()">
+        <tr>
+            <td style="font-size:18px">Data</td>
+        </tr>
+        <tr>
+            <td>
+                <div style="font-size:12px;padding-right:20px">Define and maintain custom data sets</div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="workspace_settings_tpl" class="tpl">
+    <div class="generic_head">Workspace Settings</div>
+    <table class="generic_cell" onclick="ui.showAPIDetail()">
+        <tr>
+            <td style="font-size:18px">API</td>
+        </tr>
+        <tr>
+            <td>
+                <div style="font-size:12px;padding-right:20px">View API credentials for your workspaces</div>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+
+<div id="api_settings_tpl" class="tpl">
+    <div class="generic_head">API Credentials</div>
+    <p>API Key</p>
+    <input type="text" readonly value="{api_key}" style="min-width:100%;max-width:100%;width:100%;background-color:transparent;border:0px solid black;color:white;text-align:center">
+    <p>API Secret Key</p>
+    <input type="text" readonly value="{secret_key}" style="min-width:100%;max-width:100%;width:100%;background-color:transparent;border:0px solid black;color:white;text-align:center">
+</div>
+
+
+<div id="activity_form_object_tpl" class="tpl">
+    <div class="activity_object draggable-activity blue_background" id="{id}" data-id="{id}" style="top:{top}px; left:{left}px">
+        <table width="100%">
+            <tr>
+                <td><img src="images/menu-white.png" class="button" onclick="ui.showActivityEditor('{id}')" style="max-width:20px;"></td>
+                <td id="activity_name_{id}" data-default="Form">{name}</td>
+                <td align="right"><img src="images/move.png?t=1" style="max-width:20px" class="handle"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+<div id="activity_timer_object_tpl" class="tpl">
+    <div class="activity_object activity_object_timer draggable-activity pink_background" id="{id}" data-id="{id}" style="top:{top}px; left:{left}px">
+        <table width="100%">
+            <tr>
+                <td><img src="images/menu-white.png" class="button" onclick="ui.showActivityEditor('{id}')" style="max-width:20px;"></td>
+                <td id="activity_name_{id}" data-default="Timer">{name}</td>
+                <td align="right"><img src="images/move.png?t=1" style="max-width:20px" class="handle"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+
+<div id="activity_api_object_tpl" class="tpl">
+    <div class="activity_object activity_object_api draggable-activity purple_background" id="{id}" data-id="{id}" style="top:{top}px; left:{left}px">
+        <table width="100%">
+            <tr>
+                <td><img src="images/menu-white.png" class="button" onclick="ui.showActivityEditor('{id}')" style="max-width:20px;"></td>
+                <td id="activity_name_{id}" data-default="API">{name}</td>
+                <td align="right"><img src="images/move.png?t=1" style="max-width:20px" class="handle"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+<div id="activity_role_object_tpl" class="tpl">
+    <div class="activity_object activity_object_role draggable-activity" data-id="{id}" id="{id}" style="top:{top}px; left:{left}px">
+        <table width="100%">
+            <tr>
+                <td><img src="images/menu-white.png" class="button" onclick="ui.showActivityEditor('{id}')" style="max-width:20px;"></td>
+                <td id="activity_name_{id}" data-default="Role">{name}</td>
+                <td align="right"><img src="images/move.png?t=1" style="max-width:20px" class="handle"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+
+<div id="activity_notify_object_tpl" class="tpl">
+    <div class="activity_object activity_object_notify draggable-activity" id="{id}" data-id="{id}" style="top:{top}px; left:{left}px">
+        <table width="100%">
+            <tr>
+                <td><img src="images/menu-white.png" class="button" onclick="ui.showActivityEditor('{id}')" style="max-width:20px;"></td>
+                <td id="activity_name_{id}" data-default="Notify">{name}</td>
+                <td align="right"><img src="images/move.png?t=1" style="max-width:20px" class="handle"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<div id="activity_payment_object_tpl" class="tpl">
+    <div class="activity_object activity_object_payment draggable-activity" id="{id}" data-id="{id}" style="top:{top}px; left:{left}px">
+        <table width="100%">
+            <tr>
+                <td><img src="images/menu-white.png" class="button" onclick="ui.showActivityEditor('{id}')" style="max-width:20px;"></td>
+                <td id="activity_name_{id}" data-default="Payment">{name}</td>
+                <td align="right"><img src="images/move.png?t=1" style="max-width:20px" class="handle"></td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+    <!-- <div class="btn" onclick="ui.showEditFormQuestion()">Add a question</div> -->
+<div id="edit_connection_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px">Edit Connection</div></td>
+        </tr>
+    </table>
+    <p>Follow this connection when:</p>
+    <select id="connection_question_ref" onchange="ui.connectionQuestionChange()">
+        <option value="">Select a question</option>
+        <option value="">Clear</option>
+    </select>
+    <p>is:</p>
+    <select id="connection_check_condition">
+        <option value="empty">is empty</option>
+        <option value="not_empty">isn't empty</option>
+        <option value="is">is</option>
+        <option value="is_not">isn't</option>
+        <option value="contains">contains</option>
+    </select>
+    <br>
+    <input type="text" id="connection_check_value" placeholder="Enter value to compare">
+    <select id="connection_check_value_yes_no" style="display:none">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+    <div class="btn" onclick="ui.saveConnectionRule('{connection_id}')">Save</div>
+    <div class="btn" onclick="ui.deleteConnectionRule('{connection_id}')">Delete</div>
+</div>
+
+
+
+<div id="edit_activity_role_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px"><input type="text" value="{name}" class="activity_title_input" onblur="ui.updateActivityTitle()"></div></td>
+            <td align="right" onclick="ui.saveRole()"><u style="font-size:12px;padding:10px;">Save</u></td>
+        </tr>
+    </table>
+    <table style="padding:30px">
+        <tr>
+            <td>
+                Assign Persons
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select id="role_type" onchange="ui.changeActivityRoleType()">
+                    <option value="email">Specific Person</option>
+                    <option value="person">Person from Role</option>
+                    <option value="anyone">Anyone in Role</option>
+                    <option value="round_robin">Round Robin</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="select_role">
+            <td>
+                <select id="select_role_id" onchange="ui.loadActivityRoleMembers()">
+                    <option value="">Select a role</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="select_role_member">
+            <td>
+                <select id="select_uid">
+                    <option value="">Select a Member</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="select_email">
+            <td>
+                <input type="email" id="role_email" placeholder="Email">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea id="role_body" placeholder="Message to send" style="width:300px;height:190px"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="edit_activity_api_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px"><input type="text" value="{name}" class="activity_title_input" onblur="ui.updateActivityTitle()"></div></td>
+            <td align="right" onclick="ui.saveAPI()"><u style="font-size:12px;padding:10px;">Save</u></td>
+        </tr>
+    </table>
+    <table style="padding:30px">
+        <tr>
+            <td>
+                Credentials
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="api_user" placeholder="API Username">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="password" id="api_password" placeholder="API Password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="api_url" placeholder="API URL">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select id="api_method">
+                    <option value="GET">Use GET</option>
+                    <option value="POST">Use POST</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <textarea id="api_params" rows="7" cols="80" placeholder="API Data, one per line, name = value e.g. email_address = @user_email"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+<div id="edit_activity_timer_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px"><input type="text" value="{name}" class="activity_title_input" onblur="ui.updateActivityTitle()"></div></td>
+            <td align="right" onclick="ui.saveTimer()"><u style="font-size:12px;padding:10px;">Save</u></td>
+        </tr>
+    </table>
+    <table style="padding:30px">
+        <tr>
+            <td>
+                <select id="timer_rule" onchange="ui.setTimerRules()" class="timer_option">
+                    <option value="fixed">Wait for a time period</option>
+                    <option value="relative">Wait until a user submitted date and time</option>
+                    <option value="value_change">Wait for a field to change</option>
+                    <option value="exact_date">Wait for an exact date and time</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table style="padding:30px" data-rule="fixed" class="timer_options">
+        <tr>
+            <td colspan="2">
+                Wait for a time period
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" style="width:40px" id="wait_for_duration" class="timer_option">
+            </td>
+            <td>
+                <select id="wait_for_unit" class="timer_option">
+                    <option value="minutes">Minutes</option>
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <table style="padding:30px" data-rule="relative" class="timer_options">
+        <tr>
+            <td colspan="2">
+                Wait for a time period
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" style="width:40px" id="wait_for_duration_before_after" class="timer_option">
+            </td>
+            <td>
+                <select id="wait_for_unit_before_after" class="timer_option">
+                    <option value="minutes">Minutes</option>
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <select id="wait_before_after" class="timer_option">
+                    <option value="minutes">Before</option>
+                    <option value="hours">After</option>
+                </select>
+            </td>
+            <td>
+                <input type="date" id="until_date" class="timer_option">
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+<div id="edit_activity_payment_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px"><input type="text" value="{name}" class="activity_title_input" onblur="ui.updateActivityTitle()"></div></td>
+            <td align="right" onclick="ui.savePayment()"><u style="font-size:12px;padding:10px;">Save</u></td>
+        </tr>
+    </table>
+    <table style="padding:30px">
+        <tr>
+            <td>
+                <input type="text" id="payment_description" placeholder="Payment Description">
+                <br>
+                (or placeholder from previous activity e.g. @payment_description)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="payment_total" placeholder="Payment Total">
+                <br>
+                (or placeholder from previous activity e.g. @payment_total)
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="edit_activity_notify_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px"><input type="text" value="{name}" class="activity_title_input" onblur="ui.updateActivityTitle()"></div></td>
+            <td align="right" onclick="ui.saveNotify()"><u style="font-size:12px;padding:10px;">Save</u></td>
+        </tr>
+    </table>
+    <table style="padding:30px">
+        <tr>
+            <td>To:</td>
+            <td>
+                <input type="email" id="notify_to">
+            </td>
+        </tr>
+        <tr>
+            <td>Bcc:</td>
+            <td>
+                <input type="email" id="notify_bcc">
+            </td>
+        </tr>
+        <tr>
+            <td>Subject:</td>
+            <td>
+                <input type="text" id="notify_subject">
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <textarea style="width:250px;height:200px" id="notify_body" placeholder="Message Body"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="edit_activity_form_tpl" class="tpl">
+    <table width="100%" class="generic_head">
+        <tr>
+            <td align="left"><div style="padding:10px;font-size:24px"><input type="text" value="{name}" class="activity_title_input" onblur="ui.updateActivityTitle()"></div></td>
+            <td width="120" align="right" onclick="ui.showAddQuestion()"><u style="font-size:12px;padding:10px;">+Add</u></td>
+        </tr>
+    </table>
+
+    <div id="edit_question_list" class="designer_questions_drop_zone"></div>
+    <div id="add_question_selector">
+        <table>
+            <tr>
+                <td align="left"><div onclick="ui.closeAddQuestion()" style="color:black"><img src="images/arrow_forward.png" style="max-height:30px"></div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="1">Short text</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="2">Long text</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="4">Date</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="5">Number</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="6">Email</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="7">Yes / No</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="8">Multiple choice</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="9">Auto complete</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="10">Dropdown</div></td>
+            </tr>
+            <tr>
+                <td><div class="draggable_question_type" data-question-type="11">Statement</div></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<!-- Designer questions start -->
+
+<div id="designer_question_submit_tpl" class="tpl">
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <div class="btn submit_btn">{question_text}</div>
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="designer_question_auto_complete_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" id="question_{question_id}">
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div id="designer_question_short_text_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <input type="text" id="question_{question_id}">
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div id="designer_question_statement_tpl" class="tpl">
+    <div class="designer_question_draggable label" style="width:{statement_width}px;height:{statement_height}px" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+    </div>
+</div>
+
+
+
+
+<div id="designer_question_yes_no_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <input type="checkbox" id="question_{question_id}" class="switchery">
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div id="designer_question_multi_choice_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <select id="options_for_{question_id}" style="height:120px" multiple>
+                    </select>
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+<div id="designer_question_dropdown_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <select id="options_for_{question_id}">
+                    </select>
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+<div id="designer_question_long_text_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <textarea id="question_{question_id}"></textarea>
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+<div id="designer_question_email_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <input type="email" id="question_{question_id}">
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div id="designer_question_date_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <input type="date" id="question_{question_id}">
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+<div id="designer_question_number_tpl" class="tpl">
+    <div class="designer_question_draggable label" data-question-id="{question_id}"><label for="question_{question_id}">{question_text}</label></div>
+    <div class="question_input designer_question_draggable" data-question-id="{question_id}">
+        <table>
+            <tr>
+                <td>
+                    <input type="number" id="question_{question_id}">
+                </td>
+                <td>
+                    <img src="images/edit-white.png" class="button" onclick="ui.showEditFormQuestion('{question_id}')" style="max-width:20px;">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- Designer questions end -->
+
+
+<div id="edit_form_question_tpl" class="tpl">
+    <div class="generic_head">Edit Question</div>
+    <div class="label center">Type:</div>
+    <select id="question_type_selector" onchange="ui.setQuestionOptions('{question_id}', true)">
+        <option value="1">Short text</option>
+        <option value="2">Long text</option>
+        <option value="3">Rich text</option>
+        <option value="4">Date</option>
+        <option value="5">Number</option>
+        <option value="6">Email</option>
+        <option value="7">Yes / No</option>
+        <option value="8">Multiple choice</option>
+        <option value="9">Auto complete</option>
+        <option value="10">Dropdown</option>
+        <option value="11">Statement</option>
+        <option value="12">File Upload</option>
+        <option value="13">Button</option>
+    </select>
+    <div id="edit_question_options"></div>
+
+
+    <div class="btn" onclick="ui.saveFormQuestion('{question_id}')">Save</div>
+</div>
+
+<div id="edit_question_type_short_text_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <div style="max-width:600px;margin-left:auto;margin-right:auto"><textarea id="question_text" class="question_data ckeditor"></textarea></div>
+
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+
+    <div class="label center">Who can view this field:</div>
+    <select>
+        <option value="">Everybody</option>
+        <option value="">Role X</option>
+    </select>
+    <div class="label center">Who can edit this field:</div>
+    <select>
+        <option value="">Everybody</option>
+        <option value="">Role X</option>
+    </select>
+
+</div>
+<div id="edit_question_type_statement_tpl" class="tpl">
+    <div class="label center">Statement:</div>
+    <textarea rows="8" cols="90" id="question_text" class="question_data" data-format="nl2br"></textarea>
+    <table style="margin-left:auto;margin-right:auto">
+        <tr>
+            <td align="center">Width:</td>
+            <td align="center">Height:</td>
+        </tr>
+        <tr>
+            <td>
+                <input type="number" style="width:50px" id="statement_width" class="question_data">
+            </td>
+            <td>
+                <input type="number" style="width:50px" id="statement_height" class="question_data">
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="edit_question_type_long_text_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+
+</div>
+
+<div id="edit_question_type_date_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+</div>
+
+<div id="edit_question_type_number_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+</div>
+
+<div id="edit_question_type_email_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+</div>
+
+<div id="edit_question_type_auto_complete_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+
+    <br>
+    <div class="label center">Link from imported data:</div>
+    <br>
+    <select class="question_data" id="data_link" onchange="ui.toggleDataLinkOptions();ui.toggleDataLinkKeyColumn()">
+        <option value="">No</option>
+    </select>
+    <br>
+    <div id="imported_data_options">
+        <div class="label center">Select a key field:</div>
+        <select id="data_link_key" class="question_data"></select>
+    </div>
+    <div id="manual_data_options">
+        <div class="label center">Options:</div>
+        <br>
+
+        <textarea id="question_options" class="question_data" placeholder="One option per line"></textarea>
+    </div>
+</div>
+
+
+
+<div id="edit_question_type_yes_no_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <textarea rows="8" cols="90" id="question_text" class="question_data" data-format="nl2br"></textarea>
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+</div>
+
+
+<div id="edit_question_type_dropdown_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+
+
+    <br>
+    <div class="label center">Link from imported data:</div>
+    <br>
+    <select class="question_data" id="data_link" onchange="ui.toggleDataLinkOptions();ui.toggleDataLinkKeyColumn()">
+        <option value="">No</option>
+    </select>
+    <br>
+    <div id="imported_data_options">
+        <div class="label center">Select a key field:</div>
+        <select id="data_link_key" class="question_data"></select>
+    </div>
+    <div id="manual_data_options">
+        <div class="label center">Options:</div>
+        <br>
+
+        <textarea id="question_options" class="question_data" placeholder="One option per line"></textarea>
+    </div>
+</div>
+
+
+
+<div id="edit_question_type_multi_choice_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+
+
+    <br>
+    <div class="label center">Link from imported data:</div>
+    <br>
+    <select class="question_data" id="data_link" onchange="ui.toggleDataLinkOptions();ui.toggleDataLinkKeyColumn()">
+        <option value="">No</option>
+    </select>
+    <br>
+    <div id="imported_data_options">
+        <div class="label center">Select a key field:</div>
+        <select id="data_link_key" class="question_data"></select>
+    </div>
+    <div id="manual_data_options">
+        <div class="label center">Options:</div>
+        <br>
+
+        <textarea id="question_options" class="question_data" placeholder="One option per line"></textarea>
+    </div>
+
+</div>
+
+
+
+<div id="edit_question_type_drop_down_tpl" class="tpl">
+    <div class="label center">Question:</div>
+    <input type="text" id="question_text" class="question_data">
+    <div class="label center">Options:</div>
+    <textarea id="question_options" rows="4" placeholder="One per line..." class="question_data"></textarea>
+
+    <div class="label center">Reference:</div>
+    <input type="text" id="question_ref" class="question_data">
+
+
+    <br>
+    <div class="label center">Link from imported data:</div>
+    <br>
+    <select class="question_data" id="data_link" onchange="ui.toggleDataLinkOptions();ui.toggleDataLinkKeyColumn()">
+        <option value="">No</option>
+    </select>
+    <br>
+    <div id="imported_data_options">
+        <div class="label center">Select a key field:</div>
+        <select id="data_link_key" class="question_data"></select>
+    </div>
+    <div id="manual_data_options">
+        <div class="label center">Options:</div>
+        <br>
+
+        <textarea id="question_options" class="question_data" placeholder="One option per line"></textarea>
+    </div>
+
+
+
+
+
+</div>
+
+<div id="workflow_tpl" class="tpl">
+    <div id="question_list"></div>
+</div>
+
+<!--
+<div id="question_yes_no_tpl" class="tpl">
+    <div class="question">{question}</div>
+    <select class="answer" data-ref="{question_ref}">
+        <option value=""></option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+</div>
+-->
+
+
+<div id="question_number_tpl" class="tpl">
+    <div class="question">{question}</div>
+    <input type="number" class="answer" data-ref="{question_ref}">
+</div>
+
+
+<div id="question_submit_tpl" class="tpl">
+    <div data-ref="_submit" class="btn submit_btn" onclick="ui.submitActivity()" style="{style}">{question_text}</div>
+</div>
+
+<div id="question_short_text_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <label for="{question_id}">{question_text}</label>
+    </div>
+    <input type="text" class="answer" id="{question_id}" style="{style}" data-ref="{question_ref}">
+</div>
+
+
+<div id="question_number_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <label for="{question_id}">{question_text}</label>
+    </div>
+    <input type="number" class="answer" id="{question_id}" style="{style}" data-ref="{question_ref}">
+</div>
+
+
+
+
+<div id="question_auto_complete_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <label for="{question_id}">{question_text}</label>
+    </div>
+    <input type="text" class="answer" id="{question_id}" style="{style}" data-ref="{question_ref}">
+</div>
+
+
+<div id="question_statement_tpl" class="tpl">
+    <div class="question label" style="{label_style};width:{statement_width}px;height:{statement_height}px">
+        <div style="text-align:left">{question_text}</div>
+    </div>
+</div>
+
+
+<div id="question_yes_no_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <label for="{question_id}">{question_text}</label>
+    </div>
+    <div style="{style}">
+        <input type="checkbox" class="answer" id="{question_id}" data-ref="{question_ref}">
+    </div>
+</div>
+
+<div id="question_multi_choice_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <label for="{question_id}">{question_text}</label>
+    </div>
+    <select class="answer " id="{question_id}" style="{style};height:120px;" data-ref="{question_ref}" multiple>
+    </select>
+    </div>
+</div>
+
+<div id="question_dropdown_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <label for="{question_id}">{question_text}</label>
+    </div>
+    <select class="answer " id="{question_id}" style="{style}" data-ref="{question_ref}">
+    </select>
+</div>
+
+
+
+<div id="question_rich_text_tpl" class="tpl">
+    <div class="question" data-ref="{question_ref}" style="{label_style}">{richtext}</div>
+</div>
+
+<div id="question_long_text_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <div class="question">{question_text}</div>
+    </div>
+    <textarea class="answer" data-ref="{question_ref}" id="{question_id}" style="{style}"></textarea>
+</div>
+
+
+
+<div id="question_date_tpl" class="tpl">
+    <div class="question label" style="{label_style}">
+        <div class="question">{question_text}</div>
+    </div>
+    <input type="date" class="answer" data-ref="{question_ref}" id="{question_id}" style="{style}">
+</div>
+
+
+
+<div id="activity_completed_tpl" class="tpl">
+    <div class="generic_head">Thank you</div>
+    <h2>Your workflow is now complete</h2>
+    <br>
+    <div class="btn submit_btn" onclick="ui.showHome(true)">Done</div>
+
+</div>
+
+
+<div id="login_win_tpl" class="tpl">
+    <div id="login_win">
+        <div class="generic_head">Username</div>
+        <br>
+        <div>
+            <input type="text" placeholder="Email or Cell Number" id="uname_txt" value="{uname_txt}" onchange="session.updateUserName(this)">
+        </div>
+        <div class="btn button" onclick="session.sendOTP()">
+            Continue
+        </div>
+        <br>
+        <a style="color:white" class="text_only_shadow" href="mailto:support@processpal.co.za?subject=App&nbsp;support">Contact support</a>
+    </div>
+</div>
+
+<div id="otp_win_tpl" class="tpl">
+    <div id="otp_win">
+        <div class="generic_head">One-Time PIN</div>
+        <p class="padded_text">Your One-Time PIN has successfully been sent to {uname}, please enter it below</p>
+        <div>
+            <input type="text" placeholder="One-Time PIN" id="otp_txt" value="">
+        </div>
+        <div class="btn button" onclick="session.validateOTP()">
+            Continue
+        </div>
+        <div class="btn button" onclick="session.resendOTP()">
+            Resend
+        </div>
+        <br>
+    </div>
+</div>
+
+<!--
+<div id="login_win_tpl" class="tpl">
+    <div id="login_win">
+
+        <div>
+            <input type="text" class="phone-input" id="email_txt" value="{email_txt}" onchange="session.updateDeviceEmail(this)">
+        </div>
+        <div>
+            <input type="password" id="device_pin_txt" placeholder="Your Password">
+        </div>
+        <div id="login_otp" style="display:none">
+            <center>
+            <table>
+                <tr>
+                    <td>
+                        <input type="password" id="device_otp_txt" placeholder="One Time Pin" style="max-width:110px;width:110px;font-size:14px;">
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <div id="resend_otp" class="btn_small" style="font-size:12px" onclick="session.resendOTP()">Resend</div>
+                    </td>
+                </tr>
+            </table>
+            </center>
+        </div>
+        <div id="session_message" class="text_only_shadow">&nbsp; </div>
+        <div class="btn button" onclick="session.validatePIN()">
+            Sign in
+        </div>
+        <div class="btn button" onclick="session.showRegisterWin()">
+            Register
+        </div>
+        <div class="btn button" onclick="session.showResetPIN()">
+            Reset password
+        </div>
+        <div class="btn button processpal_orange_bg" onclick="appNav.popTemplate();appNav.popTemplate()">
+            Back
+        </div>
+
+        <br>
+        <a style="color:white" class="text_only_shadow" href="mailto:support@processpal.co.za?subject=Processpal&nbsp;app&nbsp;support">Contact support</a>
+    </div>
+</div>
+-->
+
+<div id="reset_pin_tpl" class="tpl">
+    <div id="reset_pin_div" class="dark_bg">
+        <div>
+            <br>
+            <p style="font-size:18px;padding-left:20px;padding-right:20px">Reset your Processpal Password</p>
+        </div>
+        <p style="font-size:12px;padding-left:20px;padding-right:20px">Please select a new password you would like to log in with which contains at least 6 characters. You can choose any password you like. To keep your account safe you should try to use lower and upper-case characters combined with numbers</p>
+        <div>
+            <input type="password" id="reset_pword1" value="" placeholder="New password">
+        </div>
+        <div>
+            <input type="password" id="reset_pword2" value="" placeholder="Re-enter password">
+        </div>
+        <br>
+
+        <div class="btn button" onclick="session.resetPIN()">
+            Reset Password
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+    </div>
+</div>
+
+
+
+<div id="register_tpl" class="tpl">
+    <div id="register_init">
+        <div>
+            <br>
+            <p style="font-size:18px;padding-left:20px;padding-right:20px">Processpal is your one stop app for finding, ordering and paying for incredible deals</p>
+        </div>
+
+        <div id="register_legal">
+            <p style="font-size:14px;padding-right:20px;padding-left:20px">The Processpal app does not store any credit card information on our servers and we
+            take great care in protecting your privacy</p>
+
+
+            <p style="font-size:14px;padding-right:20px;padding-left:20px;">You must agree to the Terms of Use and Privacy Policy before using Processpal</p>
+            <table class="generic_cell" style="width:100%;height:60px;" onclick="ui.showTC()">
+                <tr>
+                    <td style="padding:20px">View Terms of Use</td>
+                </tr>
+            </table>
+            <table class="generic_cell" style="width:100%;height:60px;" onclick="ui.showPrivacyPolicy()">
+                <tr>
+                    <td style="padding:20px">View Privacy Policy</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <table width="100%" id="register_legal_buttons">
+                <tr>
+                    <td align="center">
+                        <div class="btn_small" onclick="ui.doAcceptLegal()">Accept</div>
+                    </td>
+                    <td align="center">
+                        <div class="btn_small" onclick="appNav.popTemplate()">Decline</div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div id="register_info">
+            <div>
+                <input type="text" id="reg_email_txt" value="{email_txt}" class="phone-input"
+                       placeholder="Your Email Address" onchange="session.updateDeviceEmail(this)">
+            </div>
+
+
+            <div>
+                <input type="text" id="reg_first_name" value="" placeholder="First Name">
+            </div>
+            <div>
+                <input type="text" id="reg_last_name" value="" placeholder="Last Name">
+            </div>
+
+            <div>
+                <input type="text" id="reg_email" value="" placeholder="Email Address">
+            </div>
+            <p style="font-size:12px;padding-left:20px;padding-right:20px">Please select a password you would like to log in with which contains at least 6 characters. You can choose any password you like. To keep your account safe you should try to use lower and upper-case characters combined with numbers</p>
+            <div>
+                <input type="password" id="reg_pword1" value="" placeholder="Select a password">
+            </div>
+            <div>
+                <input type="password" id="reg_pword2" value="" placeholder="Re-enter password">
+            </div>
+            <div id="register_message" style="padding:10px;color:orange"></div>
+
+            <div class="btn button" onclick="session.doRegister()" id="register_button" style="display:none">
+                Register
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+<!--
+
+    <table class="settings_cell button" onclick="ui.showPaymentInfo()">
+        <tr>
+            <td>
+                Payment details
+            </td>
+        </tr>
+    </table>
+
+-->
+
+
+<div id="about_me_tpl" class="tpl">
+    <div class="about_me_div">
+        <br>
+        <center>
+        <table class="form_tbl text_shadow">
+            <tr>
+                <td class="form_col_top_left">Name</td>
+                <td class="form_col_top_right"><input type="text" id="about_me_fname" class="form_input" placeholder="Your first name"></td>
+            </tr>
+            <tr>
+                <td class="form_col_center_left">Surname</td>
+                <td class="form_col_center_right"><input type="text" id="about_me_lname" class="form_input" placeholder="Your last name"></td>
+            </tr>
+            <tr>
+                <td class="form_col_center_left">Email</td>
+                <td class="form_col_center_right"><input type="text" id="about_me_email_address" class="form_input" placeholder="Your email address"></td>
+            </tr>
+
+            <tr>
+                <td class="form_col_bottom_left">Cell</td>
+                <td class="form_col_bottom_right"><input type="text" readonly id="about_me_cellno" class="form_input" placeholder="Your cell number"></td>
+            </tr>
+
+        </table>
+        <br>
+        <div class="nav_btn button" onclick="session.updateUserData()">
+            Update
+        </div>
+
+        </center>
+    </div>
+</div>
+
+
+
+
+
+<div id="settings_div" class="overthrow">
+    <div style="text-align:center;background-color:black">
+        <div style="font-size:15px;padding:30px">Processpal</div>
+    </div>
+
+
+    <div class="generic_head processpal_blue_bg">
+                My Profile
+    </div>
+
+
+    <table class="settings_cell button" onclick="ui.viewAboutMe()">
+        <tr>
+            <td>
+                Edit my information
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="generic_head processpal_blue_bg">
+                Notifications
+    </div>
+
+    <table class="settings_cell">
+        <tr>
+            <td>
+                Allow push notifications
+                <p style="font-size:11px">Get notifications on your home screen</p>
+            </td>
+            <td align="left" width="40px">
+                <input type="checkbox" id="allow_push_notification">
+            </td>
+        </tr>
+    </table>
+
+    <table class="settings_cell">
+        <tr>
+            <td>
+                <a style="font-size:inherit;text-decoration: none;color:white;" href="mailto:support@processpal.co.za?subject=ProcessPal&nbsp;App&nbsp;feedback">Send us feedback!</a>
+            </td>
+        </tr>
+    </table>
+
+
+    <div class="generic_head processpal_blue_bg">
+                Legal
+    </div>
+
+    <table class="settings_cell button" onclick="ui.showTC()">
+        <tr>
+            <td>
+                Terms of Use
+            </td>
+        </tr>
+    </table>
+    <table class="settings_cell button" onclick="ui.showPrivacyPolicy()">
+        <tr>
+            <td>
+                Privacy Policy
+            </td>
+        </tr>
+    </table>
+
+
+
+    <div class="generic_head processpal_blue_bg">
+                Session
+    </div>
+    <table class="settings_cell button" onclick="session.showLogin();ui.showSettings()">
+        <tr>
+            <td>
+                Sign out
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <br>
+    <div style="font-size:12px">Powered by ProcessPal</div>
+    <br>
+    <br>
+</div>
+<div id="loading_tpl" class="tpl">
+    <div id="loading_div" style="font-size:22px">
+        <div class="top_bar">
+            <div class="logo"></div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <img src="images/PP-Registered-Logo-only.png" style="max-width:400px;width:80%;">
+        <br>
+        <br>
+        {message}
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+</div>
+
+
+<div id="notification_win" style="background-color:black; padding:10px; width:100%; max-width:200px; text-align:center;height:200px;position:absolute;bottom:-200px;display:none;z-index:4000">
+    <table width="100%">
+        <tr>
+            <td width="30"></td>
+            <td align="center">
+                Message
+            </td>
+            <td width="30">
+                <img style="width:30px;float:right" src="images/close_button.png" onclick="appNav.hideNotification()">
+            </td>
+        </tr>
+        <tbody id="notification_win_body">
+        </tbody>
+    </table>
+</div>
+
+<div id="notification_cell_tpl" class="tpl">
+    <table width="100%" style="height:60px;border-bottom: 1px solid white" onclick="appNav.handleNotification('{type}', '{id}')">
+        <tr>
+            <td><div style="font-size:12px">{message}</div></td>
+        </tr>
+    </table>
+</div>
+
+
+<div id="tc_tpl" class="tpl">
+    <div style="font-size:14px;padding:10px; text-align:left;font-family:Helvetica ">
+        <br>
+        PROCESSPAL Terms and Conditions<br>
+
+        Add here...
+
+    </div>
+</div>
+
+<div id="privacy_policy_tpl" class="tpl">
+    <div style="font-size:14px;padding:10px; text-align:left;font-family:Helvetica ">
+PRIVACY AND COOKIE POLICY<br>
+<br>
+Last Updated: 12 August, 2015<br>
+<br>
+1. General<br>
+<br>
+1.1 This privacy and cookie policy ("Privacy and Cookie Policy") (together with our terms of use at https://processpal.co.za/legal/TermsOfUse.txt and any other documents referred to therein ("Terms of Use") explains how personal data are collected from you and used by ProcessPal ("ProcessPal" or "we", "us", "our") its subsidiaries, affiliated companies and other third parties. This Privacy and Cookie Policy applies to (i) the ProcessPal website at https://processpal.co.za (the "Site"), (ii) the ProcessPal free download mobile retail applications for Android and iOS (iPhone), (the "App"), and (iii) ProcessPal's related online and mobile services as described in the Terms of Use (the "Services").<br>
+<br>
+1.2 By clicking "I Agree" when you register with us and/or by browsing and using our Site, App and Services, you expressly consent to this Privacy and Cookie Policy governing:<br>
+<br>
+1.2.1 your use of our Site, App and Services;<br>
+1.2.2 the use and disclosure of your personal data in the manner set out below; and<br>
+1.2.3 the use of cookies on our Site in the manner set out below.<br>
+If you do not accept such use and disclosure, you must not click "I Agree" or use our Site, App or Services. You may also refuse the use of some or all cookies as set out in section 3 below.<br>
+<br>
+2. Data We May Collect From You<br>
+<br>
+2.1 Personal data are information that identifies you as an individual (such as your name, address, telephone number, e-mail address, photo and credit or debit card details), and information about you or your activities or preferences when such information is directly linked to personal data.<br>
+<br>
+2.2 We may collect and process the following data about you:<br>
+<br>
+2.2.1 Personal data that you provide to us at the time of downloading an App or subscribing to any of the Services, including filling in forms on our Site, posting material or requesting further services.<br>
+2.2.2 Personal data that you provide to us when you report a problem or ask a question in respect of our Site, App or Services. If you contact us, we may keep a record of that correspondence.<br>
+2.2.3 We may also ask you to complete surveys that we use for research and marketing purposes, although you do not have to respond to them.<br>
+2.2.4 Details of your visits to and use of the Site, App and any Services, including, but not limited to the following:<br>
+(a) Device information: We may collect information about the device or any computer you may use to download the App onto your device, including the device's or computer's unique device identifiers, operating system, browser type and mobile network information as well as the device's telephone number.<br>
+(b) Location information: When you use one of our location-enabled Apps or Services, we may collect and process data about your actual location.<br>
+(c) Log information: We may automatically collect and store certain information about your use of the Site, App and Services in server logs, including but not limited to internet protocol addresses, internet service provider, clickstream data, browser type and language, viewed and exited pages and date or time stamps.<br>
+(d) Unique application numbers: When you install or uninstall an App containing a unique application number or when such an App searches for automatic updates, that number and information about your installation, for example the type of operating system, may be sent to us.<br>
+3. Cookies On Our Site<br>
+<br>
+3.1 Our Site uses cookies to distinguish you from other users of our Site. This helps us to provide you with a good experience when you browse our Site and also allows us to improve our Site. Our App and Services do not use cookies.<br>
+<br>
+3.2 Cookies are small files of letters and numbers that, if you agree, we store on your browser or the hard drive of your computer to enable our computer systems to recognize your browser and to tell our systems how and when pages within our Site are visited and by how many people. For more information about cookies, see www.allaboutcookies.org or www.aboutcookies.org.<br>
+<br>
+3.3 We use the following types of cookies:<br>
+<br>
+3.3.1 Strictly necessary cookies. These are cookies that are required for the operation of our Site. They include, for example, cookies that enable you to log into secure areas of our Site, or cookies that require you to re-enter your password after a certain period of time has elapsed to protect you against others accidentally accessing your account contents.<br>
+3.3.2 Analytical/performance cookies. These cookies allow us to recognise and count the number of users and to analyse how users move around and use our Site. This helps us to improve the way our Site works, for example, by ensuring that users are finding what they are looking for easily. We also use these cookies to obtain information about your visit, including the full Uniform Resource Locators (URL) clickstream data, length of visits to certain pages, page interaction information (such as scrolling, clicks, and mouse-overs), and methods used to browse away from webpages.<br>
+3.3.3 Functionality cookies. These are used to recognise you when you return to our Site. This enables us to personalise our content for you and remember your preferences (for example, your choice of language or region). We also use these cookies to obtain information about your visit, including items you viewed or searched for, page response times and download errors.<br>
+3.3.4 Third party cookies.<br>
+(a) Our Site also uses Google Analytics, a web analytics service provided by Google, Inc. ("Google") to help us analyse how you and other users use our Site. The information generated by the Google Analytics cookie (including your IP address) will be transmitted to and stored by Google on servers in the United States. Google will use this information for the purpose of evaluating your use of our Site, compiling reports on Site activity and providing other services relating to Site activity and internet usage. Google may also transfer this information to third parties where required to do so by law, or where such third parties process the information on Google's behalf. By using our Site, you consent to the processing of data about you by Google in the manner and for the purposes set out above. Click here for an overview of privacy at Google: http://www.google.com/analytics/learn/privacy.html. To opt out of being tracked by Google Analytics across all websites visit http://tools.google.com/dlpage/gaoptout and download and install the linked add-on for your current web browser. The Google Analytics Opt-out Browser Add-on is available for Microsoft Internet Explorer, Google Chrome, Mozilla Firefox, Apple Safari and Opera: https://tools.google.com/dlpage/gaoptout.<br>
+(b) Please note that certain third parties (including, for example, advertising networks and providers of external services like web traffic analysis services) may also use cookies, over which we have no control. If you would like to disable these "third party" cookies generated by advertisers or providers of targeted advertising services, you can turn them off by going to that third party's website and setting your cookie preferences to stop any further cookies being written to your device.<br>
+(c) Advertising companies also enable you to opt-out from receiving targeted advertising. This does not stop cookies being set, but it does stop these companies using and collecting some data, for more information and opt-out controls, please see http://www.youronlinechoices.eu/<br>
+3.4 You may refuse the use of all or some cookies by selecting the appropriate settings on your browser. However, if you use your browser settings to block all cookies (including strictly necessary cookies) you may not be able to access all or parts of our Site and the functionality of our Site may be impaired.<br>
+<br>
+3.5 For more detailed information on how to block cookies, please look in your browser's help menu, or for an overview of the most commonly-used internet browsers, you can visit:<br>
+<br>
+3.5.1 http://www.cookiepedia.co.uk/index.php?title=How_to_Manage_Cookies; or<br>
+3.5.2 http://www.aboutcookies.org/<br>
+4. Where We Store Your Personal Data<br>
+<br>
+4.1 The data that we collect from you may be transferred to, and stored at, a destination outside South Africa, including the United States and/or Canada. By submitting your personal data, and using the Site, App and Services, you agree to this usage, transfer, storing and/or processing. We will take all steps reasonably necessary to ensure that your data are treated securely and in accordance with this Privacy and Cookie Policy.<br>
+<br>
+4.2 Where we have given you (or where you have chosen) a password which enables you to access certain parts of our Site or App, you are responsible for keeping this password confidential. Please do not share your password with anyone.<br>
+<br>
+5. How Your Data Are Used<br>
+<br>
+5.1 We may use your data for the following purposes:<br>
+<br>
+5.1.1 To provide the App and Services to you;<br>
+5.1.2 To operate and improve our Site, App and Services;<br>
+5.1.3 To provide customer service, including to respond to your enquiries and fulfil any of your requests for information;<br>
+5.1.4 To send you important information regarding the App and Services, changes to our terms, conditions, and policies and/or other technical notices, updates, security alerts, and support and administrative messages;<br>
+5.1.5 Unless you direct otherwise, to provide you with in App promotions, upcoming events, and other news about products and services offered by us, our affiliates and our partners, including merchants from whom you purchase goods or services via an App, which we feel may interest you;<br>
+5.1.6 To personalise your experience on the App by presenting information tailored to you and to your geographic location;<br>
+5.1.7 For our business purposes, such as data analysis, audits, developing new products, improving our Site, App and/or Services, identifying usage trends and determining the effectiveness of our communications;<br>
+5.1.8 To carry out our obligations arising from any contracts entered into between you and us;<br>
+5.1.9 To support any of the intended purposes specifically stated at the time at which you provided your personal data; and<br>
+5.1.10 For payment verification and fraud prevention purposes; and<br>
+5.1.11 As we believe to be necessary or appropriate: (a) under applicable law, including laws outside your country of residence; (b) to comply with legal process; (c) to respond to requests from public and government authorities including public and government authorities outside your country of residence; (d) to enforce or apply this Privacy and Cookie Policy or our Terms of Use; (e) to protect our operations or those of any of our affiliates; (f) to protect our rights, privacy, property or safety, and/or that of our affiliates, you or others; and (g) to allow us to pursue available remedies or limit the damages that we may sustain.<br>
+6. To Whom Your Data Are Disclosed<br>
+<br>
+6.1 In addition to disclosing your personal data as described in section 5 above, we may disclose your personal data:<br>
+<br>
+6.1.1 To agents, service providers and third parties: We may disclose your personal data to any of our agents, service providers and third parties that provide services to us in order to allow or enable us to provide and manage the Site, App or Services.<br>
+6.1.2 To merchants: We may disclose your personal data to merchants from whom you purchase goods or services via an App.<br>
+6.1.3 To legal, regulatory or governmental authorities: We may disclose your account and other personal data when we believe that release is appropriate to comply with any legal or regulatory obligation or request, to protect our rights, privacy, property or safety, and/or that of our affiliates, you or others, or to enforce or apply this Privacy and Cookie Policy or our Terms of Use. This includes exchanging information with other companies and organizations for fraud protection and credit risk reduction.<br>
+6.1.4 In connection with corporate dealings: We may disclose your personal data in connection with any merger, sale of our or our affiliates' assets, or a financing or acquisition of all or a portion of our business or our affiliates' businesses to another company.<br>
+6.1.5 With your consent: We may disclose your personal data when you agree to our sharing such data with other third parties for their own marketing purposes and subject to their separate privacy policies.<br>
+6.2 We may also disclose aggregate information about you and other users with advertisers, publishers, business partners, sponsors, and other third parties.<br>
+7. Your Choice - Direct Marketing<br>
+<br>
+7.1 You have the right to ask us not to process your personal data for marketing or promotional purposes.<br>
+<br>
+7.2 You can exercise your right to prevent such processing by checking certain boxes on the forms we use to collect your data, or you will be provided with an opportunity to unsubscribe from any marketing or promotional information that we may send you each time this is provided to you. You can also exercise this right at any time by:<br>
+<br>
+7.2.1 sending a blank message with the word "Unsubscribe" in the subject area to support@processpal.co.za;<br>
+<br>
+8. Your Rights in Relation to Your Personal Data<br>
+<br>
+8.1 You can find out if we hold any personal data about you by sending a message to support@processpal.co.za. If we do hold personal data about you we will:<br>
+<br>
+8.1.1 give you a description of it;<br>
+8.1.2 tell you why we are holding it;<br>
+8.1.3 tell you who it could be disclosed to; and<br>
+8.1.4 let you have a copy of the data in an intelligible form.<br>
+8.2 If we do hold personal data about you, you can ask us to correct, update, delete or otherwise limit our use of it, by email to support@processpal.co.za. We will comply with your request in accordance with and subject to applicable law.<br>
+<br>
+8.3 Any request under this section 8 may be subject to reasonable administration fees (charged to you by us in accordance with applicable law).<br>
+<br>
+9. Security<br>
+<br>
+9.1 We have implemented suitable security policies, organisational, administrative and technical measures to protect and safeguard all personal data under our control from unauthorized access, improper use or disclosure, unauthorized modification, unlawful destruction or accidental loss. All our employees and data processors that have access to, and are associated with the processing of your personal data, are obliged to respect your privacy.<br>
+<br>
+9.2 Please note that email or other communications via the internet are not always secure. Although we will do our best to protect your personal data, we cannot guarantee the security of the data that you transfer to use via our Site, App or via email; any transmission is at your own risk.<br>
+<br>
+10. Retention<br>
+<br>
+10.1 Your personal data will not be stored for any longer period than is necessary for the purposes for which they were collected, unless a longer retention period is required or allowed by applicable law.<br>
+<br>
+11. Facial Recognition<br>
+<br>
+11.1 Each time you make a payment via the App, we may use facial recognition technology for payment verification and fraud prevention purposes.<br>
+<br>
+12. Sensitive Data<br>
+<br>
+12.1 We ask that, with the exception of your photos, you do not send or otherwise disclose to us any sensitive personal data (e.g. information related to racial or ethnic origin, political opinions, religion or other beliefs, health, criminal background or trade union membership) on or through the Site, App, Services or otherwise.<br>
+<br>
+13. Third Party Sites/App/Services<br>
+<br>
+13.1 We are not responsible for the privacy, information or other practices of any third parties, any unaffiliated payment service or any other third party operated website or app to which the Site, App or Services contain a link.<br>
+<br>
+14. Changes<br>
+<br>
+14.1 We may change this Privacy and Cookie Policy at any time, at our sole discretion. Use of data we collect are subject to the Privacy and Cookie Policy in effect at the time such data is used. If we make changes to the Privacy and Cookie Policy, we will notify you by posting an announcement on the Site so you are always aware of what information we collect, how we use it, and under what circumstances if any, it is disclosed. If we make any changes to this Privacy and Cookie Policy, we will change the "Last Updated" date above. Changes in this manner shall be deemed to have been accepted if you continue to use the Site, App and/or Services after a period of two weeks from the date of posting on our Site.<br>
+<br>
+15. Contact Us<br>
+<br>
+15.1 Questions, comments or concerns regarding this Privacy and Cookie Policy or our use of your personal data are welcomed and should be addressed to support@processpal.co.za.<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </div>
+</div>
+
+<div id="dialog_tpl" class="tpl">
+    <div id="dialog_div">
+        <div class="top_bar">
+            <div class="logo"></div>
+        </div>
+        <br>
+        <p>{dialog_text}</p>
+        <div class="btn hidden" id="dialog_ok_click">
+            OK
+        </div>
+        <div class="btn hidden" id="dialog_cancel_click">
+            Cancel
+        </div>
+        <div class="btn hidden" id="dialog_back_click">
+            Back
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

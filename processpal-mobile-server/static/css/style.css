@@ -1,0 +1,95 @@
+.hidden {
+    display:none;
+}
+#map_wrapper {
+    position:absolute;
+    background-color:white;
+    top:0px;
+    left:0px;
+    bottom:0px;
+    right:0px;
+}
+#history_div {
+    display:none;
+    position:absolute;
+    top:0px;
+    left:0px;
+    min-height: 120%;
+    right:0px;
+    background-color:white;
+    margin:5px;
+    padding:15px;
+}
+#file_list_tbl td {
+    padding: 10px;
+}
+
+input[type=text] {
+}
+
+h1, h2 {
+}
+#main_menu {
+    line-height:50px;
+    vertical-align:middle;
+}
+#main_menu a {
+    padding:10px;
+}
+#main_menu * {
+    font-size:20px;
+    text-decoration:none;
+}
+#tabs {
+    max-width:1024px;
+    margin-bottom:100px;
+    padding-bottom:50px;
+}
+body {
+    background-color:white;
+}
+body * {
+    font-family:Helvetica
+}
+
+#patient_info_1 {
+    float:left;
+}
+#patient_info_2 {
+    float:left;
+}
+
+
+#newp_command_div, #review_command_div {
+    clear:both;
+}
+
+#edit_user_list {
+    float:left;
+    min-width:200px;
+}
+#edit_user {
+}
+
+#user_edit_message {
+    font-weight:bold;
+}
+#asearch {
+    position:absolute;
+    right: 0px;
+    width:300px;
+    margin-right:40px;
+}
+#auctions_head {
+    width:100%;
+    margin-bottom:20px;
+}
+.header {
+    font-size:22px;
+    font-weight:bold;
+}
+#auctions_title {
+    position:relative;
+    width:200px;
+    display:inline;
+}

@@ -1,0 +1,37 @@
+$def with (content)
+<html>
+<head>
+    <title>$content.title</title>
+    <link rel="stylesheet" href="static/css/notify-osd.css">
+    <link rel="stylesheet" href="static/css/smoothness/jquery-ui-1.10.3.custom.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="static/js/jquery-1.10.2.min.js"></script>
+    <script src="static/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="static/js/lib.js"></script>
+    <script src="static/js/notify-osd.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyDOi6UOyrhYs3k48GLA1qW3HLP3cmFFSMk"></script>
+    <script src="static/js/gmap.js"></script>
+</head>
+<body>
+<div id="main_menu" style="width:100%">
+    <table>
+        <tr>
+            <td>
+                <img src="static/images/vans-auctioneers-logo.jpg" style="display:inline">Mobile
+            </td>
+            <td>
+                <div style="display:inline;color:white;vertical-align:middle">
+                    <a href="auction">Auctions</a> |  <a href="admin">Admin</a> | 
+                    <a href="logout">Logout</a>   
+                    <!-- 
+                    <a href="javascript:alert('Almost there!')">HR</a> | <a href="javascript:alert('Almost there!')">Reports</a> |
+                    <a href="javascript:alert('Almost there!')">Accounts</a>
+                    -->
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+$:content
+</body>
+</html>

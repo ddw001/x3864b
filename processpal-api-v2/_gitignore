@@ -1,0 +1,4 @@
+*~
+*.pyc
+nohup.out
+send_sms.py
